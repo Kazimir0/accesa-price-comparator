@@ -62,7 +62,12 @@ public class DiscountLoaderService {
     return result;
   }
 
-
+  /**
+   * Reads a discount file and returns a list of DiscountedProduct objects.
+   * @param file The discount file to read.
+   * @param store The store name from the filename.
+   * @return A list of DiscountedProduct objects.
+   */
   private List<DiscountedProduct> readDiscountFile(Resource file, String store) {
     List<DiscountedProduct> list = new ArrayList<>();
 
@@ -100,10 +105,31 @@ public class DiscountLoaderService {
     
   }
 
+  // Helper method to extract the date from the filename
   private LocalDate getDateFromFilename(String filename) {
     String[] parts = filename.split("_");
     String dateStr = parts[2].replace(".csv", "");
     
     return LocalDate.parse(dateStr, FORMATTER);
   }
+
+  // return a list of DiscountedProduct objects from the file with the given date
+  public List<DiscountedProduct> loadDiscountsForDate(String dateString) {
+    
+    List<DiscountedProduct> result = new ArrayList<>();
+    PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+
+    try {
+        Resource[] resources = resolver.getResources("classpath:data/csv/*_discounts_" + dateString + ".csv");
+
+        for (Resource resource : resources) {
+            String store = resource.getFilename().split("_")[0]; // ex: kaufland
+            result.addAll(readDiscountFile(resource, store));
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return result;
+}
 }

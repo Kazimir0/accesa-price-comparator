@@ -50,10 +50,28 @@ Implemented features:
 3. Sorts all discounted products by percentage in descending order
 4. Returns the top N best discounted products (limit configurable)
 
-API endpoints:
+API endpoint:
 1. GET request: http://localhost:8080/api/discounts/best?limit=5 |-> Returns the top 5 products with the highest current discount percentages (sorted descending). (default value of limit is 10).
 
 Assumptions and Simplifications:
 * The most recent discount file per store is selected by parsing the date from the filename
 * Discounted products are not cross-matched with normal price files (i.e., they are standalone entries)
 * CSV fields are expected to be separated by ',' and follow the format: product_id,product_name,brand,package_quantity,package_unit,product_category,from_date,to_date,percentage_of_discount
+
+### Task 3: New Discounts.
+Description: Lists discounts that have been newly added by comparing the current discount snapshot against a previous one. ("2025-05-01" VS "2025-05-08")
+Implemented features:
+1. Loads discount data from two different dates (older and newer CSV files)
+2. Identifies new discounts by comparing entries between the two datasets
+3. A discount is considered “new” if it appears in the newer file but not in the older one ("2025-05-01" VS "2025-05-08")
+4. Returns the new discounts grouped by store (e.g., Lidl, Profi, Kaufland) for better readability
+
+API endpoint:
+1. GET  request: http://localhost:8080/api/discounts/new/by-comparison |-> Returns all newly added discounts grouped by store (based on comparing discount CSV files from 2025-05-01 and 2025-05-08).
+
+Assumptions and Simplifications:
+* Discounts are considered "new" if they are present in the newer discount files "2025-05-08" and do not exist in the older discount files "2025-05-01", based on a key composed of productId + fromDate
+* The response is grouped by store (based on filename prefix: lidl, profi, kaufland)
+* File date matching is done via the *_discounts_YYYY-MM-DD.csv pattern using Spring’s resource loader (lidl_discounts_2025-05-01.csv | profi_discounts_2025-05-01.csv | kaufland_discounts_2025-05-01.csv)
+* All responses are tested via Postman (GET: http://localhost:8080/api/discounts/new/by-comparison ), no frontend included
+* A discount is considered "new" not just because of its fromDate, but because it did not exist in the previous file. The logic compares actual presence across the two snapshots.
