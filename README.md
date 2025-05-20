@@ -75,3 +75,24 @@ Assumptions and Simplifications:
 * File date matching is done via the *_discounts_YYYY-MM-DD.csv pattern using Spring’s resource loader (lidl_discounts_2025-05-01.csv | profi_discounts_2025-05-01.csv | kaufland_discounts_2025-05-01.csv)
 * All responses are tested via Postman (GET: http://localhost:8080/api/discounts/new/by-comparison ), no frontend included
 * A discount is considered "new" not just because of its fromDate, but because it did not exist in the previous file. The logic compares actual presence across the two snapshots.
+
+### Task 4: Dynamic Price History Graphs
+Description: Provides data points that allow a frontend to calculate and display discount trends over time for individual products.
+Implemented features:
+1. Loads all available discount CSV files (for every market)
+2. Extracts and returns discount values over time for a specific product
+3. Filters results by required parameters: 'productName' and 'category'
+4. Supports optional filtering by 'store' for more granular control
+5. Returns data as a chronological list of points with date and discount percentage
+
+API endpoints:
+1. GET request: http://localhost:8080/api/discounts/price-history?productName=iaurt grecesc&category=lactate |-> Returns a list of {date,discountPercentage} points for the specified product and category.
+
+2. GET request: http://localhost:8080/api/discounts/price-history?productName=iaurt grecesc&category=lactate&store=Lidl |-> optional filter by store name (filter results by a specific store:Lidl,Kaufland,Profi)
+
+Assumptions and Simplifications:
+* The response is sorted by date in ascending order to help frontend graph rendering
+* Product filtering is based on productName (case-insensitive, contains logic) and exact match on category
+* If multiple discounts exist on the same day for the same product (in different stores) all are returned
+* No grouping is applied in the response (each entry is a flat data point); grouping logic can be handled in the frontend if needed
+* Application is tested via Postman — no frontend is implemented
