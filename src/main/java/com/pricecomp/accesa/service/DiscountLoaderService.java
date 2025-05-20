@@ -116,20 +116,24 @@ public class DiscountLoaderService {
   // return a list of DiscountedProduct objects from the file with the given date
   public List<DiscountedProduct> loadDiscountsForDate(String dateString) {
     
+    // Prepare the result list to hold all loaded discounts
     List<DiscountedProduct> result = new ArrayList<>();
+
+    // Spring utility for loading resources from the classpath
     PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
-    try {
+    try { // Load all files matching pattern "*_discounts_{date}.csv"
         Resource[] resources = resolver.getResources("classpath:data/csv/*_discounts_" + dateString + ".csv");
 
         for (Resource resource : resources) {
-            String store = resource.getFilename().split("_")[0]; // ex: kaufland
-            result.addAll(readDiscountFile(resource, store));
+            String store = resource.getFilename().split("_")[0]; // Extract store name from filename
+            result.addAll(readDiscountFile(resource, store)); // Read and parse the CSV file, then add all its products to the result list
         }
     } catch (Exception e) {
         e.printStackTrace();
     }
 
+    // Return the complete list of discounts from all stores for the specified date
     return result;
 }
 }
