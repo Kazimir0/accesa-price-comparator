@@ -57,31 +57,3 @@ Assumptions and Simplifications:
 * The most recent discount file per store is selected by parsing the date from the filename
 * Discounted products are not cross-matched with normal price files (i.e., they are standalone entries)
 * CSV fields are expected to be separated by ',' and follow the format: product_id,product_name,brand,package_quantity,package_unit,product_category,from_date,to_date,percentage_of_discount
-
-Example of JSON response: http://localhost:8080/api/discounts/best?limit=2
-[
-    {
-        "productId": "P037",
-        "productName": "detergent lichid",
-        "brand": "Persil",
-        "packageQuantity": 2.5,
-        "packageUnit": "l",
-        "productCategory": "produse de menaj",
-        "fromDate": "5/9/2025",
-        "toDate": "5/15/2025",
-        "discountPercentage": 20.0,
-        "store": "lidl"
-    },
-    {
-        "productId": "P040",
-        "productName": "șampon păr gras",
-        "brand": "Head & Shoulders",
-        "packageQuantity": 400.0,
-        "packageUnit": "ml",
-        "productCategory": "îngrijire personală",
-        "fromDate": "5/10/2025",
-        "toDate": "5/16/2025",
-        "discountPercentage": 18.0,
-        "store": "lidl"
-    }
-]
