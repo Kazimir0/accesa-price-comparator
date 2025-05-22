@@ -63,8 +63,9 @@ public class DiscountController {
 
   @GetMapping("/new/by-comparison")
   public Map<String, List<DiscountedProduct>> getNewDiscountsGroupedByStore() {
-    List<DiscountedProduct> oldDiscounts = discountLoaderService.loadDiscountsForDate("2025-05-01");
-    List<DiscountedProduct> newDiscounts = discountLoaderService.loadDiscountsForDate("2025-05-08");
+    // List<DiscountedProduct> oldDiscounts = discountLoaderService.loadDiscountsForDate("2025-05-01");
+    List<DiscountedProduct> oldDiscounts = discountLoaderService.loadDiscountsForDate("2025-05-08");
+    List<DiscountedProduct> newDiscounts = discountLoaderService.loadDiscountsForDate("2025-05-15");
 
     return newDiscountByComparisonService.getNewDiscountsGroupedByStore(oldDiscounts, newDiscounts);
   }

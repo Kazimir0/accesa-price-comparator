@@ -138,3 +138,22 @@ Assumptions and Simplifications:
 * The date of each price match is extracted from the filename (ex: "kaufland_2025-05-01.csv")
 * Price comparisons are made using exact numeric value
 * Application is tested via Postman — no frontend is implemented
+
+### Custom Dataset for Testing
+Description: To fully validate the logic implemented for all tasks, I created a set of custom test files with updated product and discount information.
+These files simulate real-world product data for the date 2025-05-15, including:
+* overlapping products across stores
+* updated prices
+* new or modified discounts
+Files created in the same directory "D:\price-comparator\accesa\src\main\resources\data\csv":
+1. kaufland_2025-05-15.csv
+2. kaufland_discounts_2025-05-15.csv
+3. lidl_2025-05-15.csv
+4. lidl_discounts_2025-05-15.csv
+5. profi_2025-05-15.csv
+6. profi_discounts_2025-05-15.csv
+I reused the same GET requests tested previously via Postman, with only one modify in DiscountController ("/new/by-comparison") to test new .csv files.
+
+List<DiscountedProduct> oldDiscounts = discountLoaderService.loadDiscountsForDate("2025-05-08");
+List<DiscountedProduct> newDiscounts = discountLoaderService.loadDiscountsForDate("2025-05-15");
+All endpoints correctly processed the new data and returned expected results — verifying logic like discount comparison, historical price trends, value-per-unit evaluation, and custom alerts.
