@@ -108,7 +108,7 @@ Implemented features:
 6. Returns a list of recommended product options across all stores
 
 API endpoints:
-1. GET request: http://localhost:8080/api/discounts/recommendations?productName=iaurt |-> Returns a list of recommended product alternatives based on the lowest unit value.
+1. GET request: http://localhost:8080/api/discounts/recommendations?productName=iaurt |-> Returns a list of recommended product alternatives based on the lowest unit value
 2. GET request: http://localhost:8080/api/discounts/recommendations?productName=iaurt&category=lactate |-> Optional filter (category)
 
 Assumptions and Simplifications:
@@ -118,4 +118,23 @@ Assumptions and Simplifications:
 * The valuePerUnit is calculated even if package sizes differ, allowing better recommendation logic
 * Each result includes product details, price, unit size, and store source
 * Results are sorted by unit value, not total price, to reflect true cost efficiency
+* Application is tested via Postman — no frontend is implemented
+
+### Task 6: Custom Price Alert
+Description: Allows users to set a target price for a product. The system identifies all current products that are at or below the specified price threshold.
+Implemented features:
+1. Loads all available product price CSV files (excluding discount files)
+2. Searches for products whose name matches the input (case-insensitive, contains(...))
+3. Filters the results by 'price <= target_price'
+4. Returns a list of product matches that meet or fall below the user’s target price
+5. Each result includes the product name, store, actual price, pack size, and the date the price was recorded
+
+API endpoint:
+1. GET request: http://localhost:8080/api/discounts/price-alert?productName=morcovi&target=2.5 |-> Returns all product entries (from all stores and dates (no included 'discounts' .csv files)) matching the name "morcovi" and priced at 2.5 RON or lower (just an example)
+
+Assumptions and Simplifications:
+* Only non-discount files are used
+* Product name filtering uses case-insensitive substring logic (contains(...))
+* The date of each price match is extracted from the filename (ex: "kaufland_2025-05-01.csv")
+* Price comparisons are made using exact numeric value
 * Application is tested via Postman — no frontend is implemented

@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pricecomp.accesa.model.DiscountedProduct;
+import com.pricecomp.accesa.model.PriceAlertMatch;
 import com.pricecomp.accesa.model.PricePoint;
 import com.pricecomp.accesa.model.RecommendedProduct;
 import com.pricecomp.accesa.service.BestDiscountService;
 import com.pricecomp.accesa.service.DiscountLoaderService;
 import com.pricecomp.accesa.service.NewDiscountByComparisonService;
+import com.pricecomp.accesa.service.PriceAlertService;
 import com.pricecomp.accesa.service.PriceHistoryService;
 import com.pricecomp.accesa.service.ProductRecommendationService;
 
@@ -27,6 +29,8 @@ public class DiscountController {
   private final NewDiscountByComparisonService newDiscountByComparisonService;
   private final PriceHistoryService priceHistoryService;
   private final ProductRecommendationService productRecommendationService;
+  private final PriceAlertService priceAlertService;
+
 
 
 
@@ -35,13 +39,15 @@ public class DiscountController {
     BestDiscountService bestDiscountService,
     NewDiscountByComparisonService newDiscountByComparisonService,
     PriceHistoryService priceHistoryService, 
-    ProductRecommendationService productRecommendationService) {
+    ProductRecommendationService productRecommendationService,
+    PriceAlertService priceAlertService) {
     
     this.discountLoaderService = discountLoaderService;
     this.bestDiscountService = bestDiscountService;
     this.newDiscountByComparisonService = new NewDiscountByComparisonService();
     this.priceHistoryService = priceHistoryService;
     this.productRecommendationService = productRecommendationService;
+    this.priceAlertService = priceAlertService;
   }
 
   /**
@@ -76,6 +82,13 @@ public class DiscountController {
   public List<RecommendedProduct> getRecommendedProducts(@RequestParam String productName,
                                                       @RequestParam(required = false) String category) {
     return productRecommendationService.getRecommendedProducts(productName, Optional.ofNullable(category));
+  }
+
+  // Returns products that match the user's target price alert
+  @GetMapping("/price-alert")
+  public List<PriceAlertMatch> getPriceAlerts(@RequestParam String productName,
+                                            @RequestParam double target) {
+    return priceAlertService.findMatchesBelowTarget(productName, target);
   }
 
 }
