@@ -17,7 +17,6 @@ public class PriceHistoryService {
 
     private static final String DISCOUNT_FILES_PATTERN = "classpath:data/csv/*_discounts_*.csv";
     private static final DateTimeFormatter FILE_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static final DateTimeFormatter CSV_DATE_FORMAT = DateTimeFormatter.ofPattern("M/d/yyyy");
 
     public List<PricePoint> getPriceHistory(String productName, String category, Optional<String> optionalStore) {
         List<PricePoint> result = new ArrayList<>();

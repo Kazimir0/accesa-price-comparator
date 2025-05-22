@@ -96,3 +96,26 @@ Assumptions and Simplifications:
 * If multiple discounts exist on the same day for the same product (in different stores) all are returned
 * No grouping is applied in the response (each entry is a flat data point); grouping logic can be handled in the frontend if needed
 * Application is tested via Postman — no frontend is implemented
+
+### Task 5: Product Substitutes & Recommendations
+Description: Helps users identify the best product alternatives by highlighting value per unit (price per kg or liter), allowing fair comparison across different pack sizes.
+Implemented features:
+1. Loads product data from all CSV files that represent regular prices (excluding discount files)
+2. Calculates ' valuePerUnit = price / packageQuantity ' for each product
+3. Filters products by ' productName ' (case-insensitive, contains logic)
+4. Optional filtering by productCategory (exact match)
+5. Sorts all matched products by valuePerUnit in ascending order (best value first)
+6. Returns a list of recommended product options across all stores
+
+API endpoints:
+1. GET request: http://localhost:8080/api/discounts/recommendations?productName=iaurt |-> Returns a list of recommended product alternatives based on the lowest unit value.
+2. GET request: http://localhost:8080/api/discounts/recommendations?productName=iaurt&category=lactate |-> Optional filter (category)
+
+Assumptions and Simplifications:
+* Only CSV files without "discount" in the filename are used to retrieve full-price data
+* Product filtering uses case-insensitive substring matching on ' productName '
+* Products are compared based on their normalized unit price (price per kg or liter)
+* The valuePerUnit is calculated even if package sizes differ, allowing better recommendation logic
+* Each result includes product details, price, unit size, and store source
+* Results are sorted by unit value, not total price, to reflect true cost efficiency
+* Application is tested via Postman — no frontend is implemented
