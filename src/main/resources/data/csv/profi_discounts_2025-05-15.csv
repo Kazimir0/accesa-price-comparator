@@ -1,0 +1,14 @@
+﻿product_id,product_name,brand,package_quantity,package_unit,product_category,from_date,to_date,percentage_of_discount
+P004,iaurt grecesc,Proxi,0.4,kg,lactate,5/15/2025,5/21/2025,10
+P007,ouă mărimea M,Din Ogradă,10,buc,ouă,5/15/2025,5/21/2025,11
+P020,spaghetti nr.5,Barilla,500,g,paste făinoase,5/16/2025,5/22/2025,14
+P024,apă plată,Aqua Carpatica,2,l,băuturi,5/17/2025,5/23/2025,6
+P030,ulei floarea-soarelui,Spornic,1,l,alimente de bază,5/15/2025,5/21/2025,7
+P039,detergent lichid,Dero,2.5,l,produse de menaj,5/16/2025,5/22/2025,17
+P045,hârtie igienică 3 straturi,Motto,10,role,produse de menaj,5/17/2025,5/23/2025,13
+P054,ciocolată neagră 70%,Poiana,100,g,gustări,5/15/2025,5/21/2025,10
+P059,morcovi,Generic,0.5,kg,legume și fructe,5/16/2025,5/22/2025,6
+P067,orez bob lung,Deroni,1,kg,alimente de bază,5/17/2025,5/23/2025,9
+P068,iaurt de băut,Activia,0.33,kg,lactate,5/15/2025,5/21/2025,11
+P069,pastă de dinți,Colgate,100,ml,îngrijire personală,5/16/2025,5/22/2025,14
+P071,pesmet alb,Baneasa,0.25,kg,alimente de bază,5/15/2025,5/21/2025,5
