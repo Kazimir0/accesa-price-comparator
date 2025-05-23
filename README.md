@@ -16,11 +16,33 @@ The following guides illustrate how to use some features concretely:
 * [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
 
 ### Maven Parent overrides
-
 Due to Maven's design, elements are inherited from the parent POM to the project POM.
 While most of the inheritance is fine, it also inherits unwanted elements like `<license>` and `<developers>` from the parent.
 To prevent this, the project POM contains empty overrides for these elements.
 If you manually switch to a different parent and actually want the inheritance, you need to remove those overrides.
+
+### How to build and run the app:
+1. Requirements:
+* Java 17+
+* Maven 3.8+
+* IDE (VS Code, IntelliJ)
+
+2. Steps to build and run:
+* Clone the repository : 'git clone https://github.com/Kazimir0/accesa-price-comparator.git' AND 'cd accesa'
+* Compile and build the project with Maven: 'mvn clean install'
+* Run the app: Open the AccesaApplication.java from : D:\price-comparator\accesa\src\main\java\com\pricecomp\accesa\AccesaApplication.java
+* The app will run on: http://localhost:8080
+* Feel free to test all endpoints using Postman
+
+### Additional example for personal testing:
+* I've created six new CSV files that simulate a new day (2025-05-15) with updated products and discounts.
+
+The purpose of these files is to demonstrate that the application:
+* Can compare discounts between new and old data files.
+* Calculates price history over multiple days.
+* Recommends alternative products based on "value per unit."
+* Finds discounts below a user-defined threshold.
+I tested the requirements on the same previously documented GET endpoints using Postman, and the functionalities were successfully validated.
 
 ### Task 1:  Daily Shopping Basket Monitoring.
 Description: Helps users split their shopping basket to optimize cost savings across different stores.

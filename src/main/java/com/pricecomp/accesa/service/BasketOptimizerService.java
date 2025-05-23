@@ -32,8 +32,8 @@ public class BasketOptimizerService {
       
       // For debugging, print some product names that might match
       allProducts.stream()
-        .filter(p -> p.getProductName() != null)
-        .limit(10)
+        .filter(p -> p.getProductName() != null) // Filter out null product names
+        .limit(10) // Limit to 10 products for logging
         .forEach(p -> logger.info("Sample product in database: '{}'", p.getProductName()));
       
       // Find the cheapest product that matches the name (case insensitive)

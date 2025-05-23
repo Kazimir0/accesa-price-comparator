@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 /**
  * Represents a single point in the price history (used for trend graphs)
  */
-@Data
+@Data // This annotation generates getters and setters for all fields
+// Is a Lombok annotation that generates boilerplate code like getters, setters, equals, hashCode, and toString methods
 @NoArgsConstructor
 @AllArgsConstructor
 public class PricePoint {

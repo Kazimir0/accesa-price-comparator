@@ -120,6 +120,8 @@ public class DiscountLoaderService {
     List<DiscountedProduct> result = new ArrayList<>();
 
     // Spring utility for loading resources from the classpath
+    // PathMatchingResourcePatternResolver is used to resolve resource patterns
+    // "find me all files that match this pattern"
     PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
     try { // Load all files matching pattern "*_discounts_{date}.csv"

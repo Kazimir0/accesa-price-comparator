@@ -40,6 +40,7 @@ public class BasketController {
 
   List<Product> allProducts = csvLoaderService.loadAllProducts();
 
+  // Return the optimized basket grouped by store
   return basketOptimizerService.optimizeAndGroupByStore(items, allProducts);
   }
 

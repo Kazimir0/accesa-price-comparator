@@ -16,9 +16,11 @@ public class BestDiscountService {
    * 
    */
   public List<DiscountedProduct> getTopDiscounts(int limit, List<DiscountedProduct> allDiscounts){
+    // I used stream to convert the list to a stream(processing flow), to use the sorted,limit and collect methods
+    // The normal 'List' does not have these methods
     return allDiscounts.stream()
-        .sorted(Comparator.comparingDouble(DiscountedProduct::getDiscountPercentage).reversed())
+        .sorted(Comparator.comparingDouble(DiscountedProduct::getDiscountPercentage).reversed()) // Sort by discount percentage in descending order
         .limit(limit)
-        .collect(Collectors.toList());
+        .collect(Collectors.toList()); // Convert the stream back to a list
   }
 }

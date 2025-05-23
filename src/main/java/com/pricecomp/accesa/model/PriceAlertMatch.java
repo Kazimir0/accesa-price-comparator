@@ -8,8 +8,13 @@ import lombok.NoArgsConstructor;
  * Represents a product that matches the user's target price alert.
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor // This annotation generates a constructor with all fields as parameters
+@NoArgsConstructor // This annotation generates a no-args constructor
+/**
+ * Represents a product that matches the user's target price alert.
+ * It contains information about the product's name, brand, store, price,
+ * package quantity, package unit, and the date of the match.
+ */
 public class PriceAlertMatch {
   private String productName;
   private String brand;

@@ -21,11 +21,17 @@ public class CsvLoaderService {
     PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
     try {
+      // Load all CSV files from the specified folder
       Resource[] resources = resolver.getResources(PRODUCTS_FOLDER);
+      // For each resource
       for (Resource resource : resources) {
         String fileName = resource.getFilename();
+        // Skip files that are not in the expected format or contain "discounts"
         if (fileName == null || fileName.contains("discounts")) continue;
+        
+        // Extract the store name from the file name  
         String store = fileName.split("_")[0];
+        // Read the products from the CSV file and add them to the list
         products.addAll(readProductFromCsv(resource, store));
       }
     } catch (IOException e) {
@@ -36,17 +42,22 @@ public class CsvLoaderService {
 
   private List<Product> readProductFromCsv(Resource resource, String store) {
     List<Product> products = new ArrayList<>();
+    //Open the resource as a BufferedReader for reading
     try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
       String line;
       boolean firstLine = true;
+      // Read each line from the CSV file
       while ((line = br.readLine()) != null) {
+        // Skip the first line (header)
         if (firstLine) {
           firstLine = false;
           continue;
         }
+        // Split the line by commas and check if it has the expected number of columns
         String[] values = line.split(",");
         if (values.length != 8) continue;
 
+        // Create a new Product object and set its properties
         Product p = new Product();
         p.setProductId(values[0]);
         p.setProductName(values[1]);

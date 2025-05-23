@@ -1,7 +1,7 @@
 package com.pricecomp.accesa.model;
 import lombok.Data; // Lombok library to reduce boilerplate code
 
-@Data
+@Data // This annotation generates getters and setters for all fields
 public class Product {
   private String productId;
   private String productName;
